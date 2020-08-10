@@ -6,6 +6,7 @@ export const initialState = {
   sources: [],
   userSources: [],
   sidebarSources: [],
+  initialized: false,
   loading: false,
   hasErrors: false,
 };
@@ -27,6 +28,9 @@ const sourcesSlice = createSlice({
       state.loading = false;
       state.hasErrors = true;
     },
+    updateInitializeState: (state) => {
+      state.initialized = true;
+    },
     updateUserSources: (state, { payload }) => {
       state.userSources = payload;
     },
@@ -41,6 +45,7 @@ export const {
   getSources,
   getSourcesSuccess,
   getSourcesFailure,
+  updateInitializeState,
   updateUserSources,
   updateSidebarSources,
 } = sourcesSlice.actions;
@@ -58,19 +63,26 @@ export function fetchSources() {
 
     try {
       const state = await loadState();
-      const userSourcesExist = state.sources.userSources.length > 0;
 
-      if (!userSourcesExist) {
-        let shuffledSources = shuffle(state.sources.sources, { copy: true });
-        shuffledSources = shuffledSources
-          .filter((source) => source.category === "built-in")
-          .slice(0, 12)
-          .map((source) => source.id);
+      if (!state.sources.initialized) {
+        const data = await window.localAgent.GlobalAppSettings();
+        if (data !== null) {
+          const globalAppSettings = JSON.parse(data);
 
-        dispatch(updateUserSources(shuffledSources));
+          let userSources = shuffle(globalAppSettings.sources, { copy: true });
+          userSources = userSources
+            .filter((source) => source.category === "built-in")
+            .slice(0, 12)
+            .map((source) => source.id);
+          dispatch(updateUserSources(userSources));
+
+          dispatch(getSourcesSuccess(globalAppSettings.sources));
+          dispatch(updateInitializeState());
+        }
+      } else {
+        dispatch(getSourcesSuccess(state.sources.sources));
       }
 
-      dispatch(getSourcesSuccess(state.sources.sources));
     } catch (error) {
       dispatch(getSourcesFailure());
     }

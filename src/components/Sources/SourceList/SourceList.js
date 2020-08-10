@@ -50,8 +50,8 @@ export const SourceList = () => {
   };
 
   const renderSources = () => {
-    if (loading) return <p>Loading sources...</p>;
-    if (hasErrors) return <p>Unable to display sources.</p>;
+    if (loading) return <p>Loading apps...</p>;
+    if (hasErrors) return <p>Unable to display apps.</p>;
 
     return (
       sources &&
