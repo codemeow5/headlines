@@ -21,14 +21,3 @@ export const EmptyState = styled.div`
     line-height: 150%;
   }
 `;
-
-export const BookmarkIcon = styled.span`
-  display: inline-block;
-  margin: 0 4px;
-
-  svg {
-    width: 18px;
-    height: 18px;
-    color: ${(props) => props.theme.gray8};
-  }
-`;

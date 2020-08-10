@@ -11,6 +11,7 @@ import {
 import googleImg from "../../assets/search/google.png";
 import bingImg from "../../assets/search/bing.png";
 import duckduckgoImg from "../../assets/search/duckduckgo.png";
+import baiduImg from "../../assets/search/baidu.png";
 
 export const Search = () => {
   const [isFocus, setIsFocus] = useState(false);
@@ -19,9 +20,11 @@ export const Search = () => {
 
   const searchParams = {
     google: "http://www.google.com/search?q=",
-    duckduckgo: "https://duckduckgo.com/?q=",
     bing: "http://www.bing.com/search?q=",
+    duckduckgo: "https://duckduckgo.com/?q=",
+    baidu: "http://www.baidu.com/s?wd=",
   };
+  const searchParamName = searchEngine.value === "baidu" ? "wd" : "q";
 
   useEffect(() => {
     switch (searchEngine.value) {
@@ -33,6 +36,9 @@ export const Search = () => {
         break;
       case "duckduckgo":
         setSearchImg(duckduckgoImg);
+        break;
+      case "baidu":
+        setSearchImg(baiduImg);
         break;
       default:
         break;
@@ -54,7 +60,7 @@ export const Search = () => {
           id="searchbar"
           type="text"
           placeholder="Search the web"
-          name="q"
+          name={searchParamName}
           autoComplete="off"
         />
         <SearchButton type="submit">

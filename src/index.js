@@ -9,24 +9,29 @@ import { saveState, loadState } from "./helpers/localStorage";
 import throttle from "lodash.throttle";
 import { deleteKeys } from "./helpers/deleteKeys";
 
-const persistedState = loadState();
+window.localAgent.ready(async function () {
 
-const store = configureStore({
-  reducer: rootReducer,
-  preloadedState: persistedState,
+  const persistedState = await loadState();
+
+  const store = configureStore({
+    reducer: rootReducer,
+    preloadedState: persistedState,
+  });
+  
+  store.subscribe(
+    throttle(async () => {
+      await saveState(
+        deleteKeys(store.getState(), ["loading", "hasErrors", "isSidebarOpen"])
+      );
+    }, 1000)
+  );
+  
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById("root")
+  );
+  
 });
 
-store.subscribe(
-  throttle(() => {
-    saveState(
-      deleteKeys(store.getState(), ["loading", "hasErrors", "isSidebarOpen"])
-    );
-  }, 1000)
-);
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById("root")
-);

@@ -57,23 +57,20 @@ export function fetchSources() {
     dispatch(getSources());
 
     try {
-      const response = await fetch(
-        `https://newsapi-proxy-server.herokuapp.com/sources`
-      );
-      const data = await response.json();
-
-      const userSourcesExist = loadState().sources.userSources.length > 0;
+      const state = await loadState();
+      const userSourcesExist = state.sources.userSources.length > 0;
 
       if (!userSourcesExist) {
-        let shuffledSources = shuffle(data.sources, { copy: true });
+        let shuffledSources = shuffle(state.sources.sources, { copy: true });
         shuffledSources = shuffledSources
-          .slice(0, 3)
+          .filter((source) => source.category === "built-in")
+          .slice(0, 12)
           .map((source) => source.id);
 
         dispatch(updateUserSources(shuffledSources));
       }
 
-      dispatch(getSourcesSuccess(data.sources));
+      dispatch(getSourcesSuccess(state.sources.sources));
     } catch (error) {
       dispatch(getSourcesFailure());
     }

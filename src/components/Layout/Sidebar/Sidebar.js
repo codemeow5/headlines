@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { equals } from "../../../helpers/";
 import { SourceList } from "../../Sources/SourceList/SourceList";
-import { BookmarkList } from "../../Bookmarks/BookmarkList/BookmarkList";
-import { Articles, Weather, Clock, Search, Theme } from "../../Settings/";
+import { Marketplace } from "../../Marketplace/Marketplace/Marketplace";
+import { Apps, Clock, Search, Theme } from "../../Settings/";
 import { useOutsideClick } from "../../../hooks/";
 import { toggleSidebar, uiSelector } from "../../../store/slices/ui";
 import {
@@ -61,13 +61,13 @@ export const Sidebar = () => {
           active={page === "sources"}
           onClick={() => setPage("sources")}
         >
-          Sources
+          Apps
         </NavigationItem>
         <NavigationItem
-          active={page === "bookmarks"}
-          onClick={() => setPage("bookmarks")}
+          active={page === "marketplace"}
+          onClick={() => setPage("marketplace")}
         >
-          Bookmarks
+          Marketplace
         </NavigationItem>
         <NavigationItem
           active={page === "settings"}
@@ -79,10 +79,9 @@ export const Sidebar = () => {
       <SidebarContainer>
         <SidebarInnerContainer page={page}>
           <SourceList />
-          <BookmarkList />
+          <Marketplace />
           <SettingsList>
-            <Articles />
-            <Weather />
+            <Apps />
             <Search />
             <Clock />
             <Theme />

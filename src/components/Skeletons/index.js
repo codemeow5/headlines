@@ -1,2 +1,1 @@
-export * from "./ArticleSkeleton/ArticleSkeleton";
-export * from "./WeatherSkeleton/WeatherSkeleton";
+export * from "./AppSkeleton/AppSkeleton";

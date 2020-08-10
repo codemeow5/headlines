@@ -1,6 +1,6 @@
 import React from "react";
 import { Clock } from "../../Clock/Clock";
-import { ArticleList } from "../../Articles/";
+import { AppList } from "../../Apps/";
 import { Search } from "../../Search/";
 import { ShortcutList } from "../../Shortcuts/";
 import { Container } from "./Content.styles";
@@ -12,7 +12,7 @@ export const Content = () => {
 
       <Search />
 
-      <ArticleList />
+      <AppList />
 
       <ShortcutList />
     </Container>

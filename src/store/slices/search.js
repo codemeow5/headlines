@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   showSearch: true,
-  searchEngine: { value: "google", label: "Google" }, // or duckduckgo, bing
+  searchEngine: { value: "baidu", label: "Baidu" }, // or duckduckgo, bing
 };
 
 const searchSlice = createSlice({

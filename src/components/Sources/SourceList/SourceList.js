@@ -34,13 +34,9 @@ export const SourceList = () => {
   }, [dispatch]);
 
   const categories = [
-    "business",
-    "entertainment",
-    "technology",
-    "general",
-    "science",
-    "sports",
-    "health",
+    "built-in",
+    "online",
+    "local",
   ];
 
   const formUpdate = (e) => {

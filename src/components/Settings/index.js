@@ -1,5 +1,4 @@
-export * from "./Articles/Articles";
+export * from "./Apps/Apps";
 export * from "./Clock/Clock";
-export * from "./Weather/Weather";
 export * from "./Search/Search";
 export * from "./Theme/Theme";

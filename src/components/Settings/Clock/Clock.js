@@ -1,12 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  toggleShowClock,
   clockSelector,
   updateTimeFormat,
   updateDateTimeFormat,
 } from "../../../store/slices/clock";
-import { Toggle, Radio, RadioGroup, Dropdown } from "../../Common/";
+import { Radio, RadioGroup, Dropdown } from "../../Common/";
 import { Label, Header, Container } from "./Clock.module";
 
 export const Clock = () => {
@@ -14,21 +13,15 @@ export const Clock = () => {
   const { showClock, timeFormat, dateTimeFormat } = useSelector(clockSelector);
 
   const clockOptions = [
+    { value: "date-time", label: "Date and Time" },
     { value: "time-only", label: "Time only" },
     { value: "date-only", label: "Date only" },
-    { value: "date-time", label: "Date and Time" },
   ];
 
   return (
     <Container disabled={!showClock}>
       <Header>
         <Label htmlfor="clock">Clock</Label>
-        {/* <Toggle
-          name="clock"
-          id="clock"
-          checked={showClock}
-          onChange={() => dispatch(toggleShowClock())}
-        /> */}
         <p>Display a clock on the new tab page.</p>
       </Header>
       <Dropdown

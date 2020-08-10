@@ -2,7 +2,6 @@
 /* global browser */
 import React, { useEffect, useState } from "react";
 import { Shortcut } from "../";
-// import { shortcutsData } from "../../../mock/shortcutsData";
 import { Container } from "./ShortcutList.module";
 
 export const ShortcutList = () => {

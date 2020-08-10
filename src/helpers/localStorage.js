@@ -1,19 +1,19 @@
-export const loadState = () => {
+export const loadState = async () => {
   try {
-    const serializedState = localStorage.getItem("state");
-    if (serializedState === null) {
+    const appSettings = await window.localAgent.AppSettings();
+    if (appSettings === null) {
       return undefined;
     }
-    return JSON.parse(serializedState);
+    return JSON.parse(appSettings);
   } catch (err) {
     return undefined;
   }
 };
 
-export const saveState = (state) => {
+export const saveState = async (state) => {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem("state", serializedState);
+    const appSettings = JSON.stringify(state);
+    await window.localAgent.SetAppSettings(appSettings);
   } catch (err) {
     // Ignore write errors.
   }

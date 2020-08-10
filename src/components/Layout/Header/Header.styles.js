@@ -13,7 +13,7 @@ const Container = styled.div`
   padding-right: ${spacing.padding.xmedium}px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 const SettingIcon = styled(MdSettings)`
